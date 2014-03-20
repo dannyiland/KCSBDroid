@@ -8,7 +8,7 @@ Android Radio streaming app
  - Display notification when the app is streaming
  
  
- ![Screen shot](http://i.imgur.com/VnHWq9l.png
+ ![Screen shot](http://i.imgur.com/VnHWq9l.png)
  
  TODO 
  - Add now playing track information
