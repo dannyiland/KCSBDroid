@@ -6,13 +6,17 @@
 package com.clickgostudio.air1072;
 
 import com.clickgostudio.air1072.R;
+
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.SeekBar;
 
 public class MainActivity extends Activity {
 
@@ -45,6 +49,8 @@ public class MainActivity extends Activity {
 			}
 		});
 
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		
 		clickListeners();
 
 	}
@@ -100,5 +106,29 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
+	
+	
+	/* public void volumeControl (){
+		final AudioManager audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+	    int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+	    int curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+	    SeekBar volControl = (SeekBar)findViewById(R.id.volbar);
+	    volControl.setMax(maxVolume);
+	    volControl.setProgress(curVolume);
+	    volControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+	        @Override
+	        public void onStopTrackingTouch(SeekBar arg0) {
+	        }
+
+	        @Override
+	        public void onStartTrackingTouch(SeekBar arg0) {
+	        }
+
+	        @Override
+	        public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
+	            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, arg1, 0);
+	        }
+	    });
+	} */
 
 }

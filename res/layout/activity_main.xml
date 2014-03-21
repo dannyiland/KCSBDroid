@@ -4,53 +4,52 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_marginTop="0dp"
-    android:background="#000000"
-    android:orientation="vertical"
-     >
+    android:background="@drawable/background_main"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:baselineAligned="false"
         android:layout_gravity="top|center"
+        android:baselineAligned="false"
         android:orientation="horizontal" >
 
         <ImageView
             android:layout_width="306dp"
             android:layout_height="306dp"
-            android:background="@drawable/radio_logo" />      
+            android:background="@drawable/radio_logo" />
     </LinearLayout>
-    
-    
+
     <!-- Middle Buttons -->
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:baselineAligned="false"
         android:gravity="center_horizontal"
         android:orientation="horizontal" >
-         
+
         <Button
             android:id="@+id/websiteBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:background="@drawable/website_icon" />
-        
+
         <Button
             android:id="@+id/phoneBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:background="@drawable/phone_icon" />
-        
+
         <Button
             android:id="@+id/emailBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:background="@drawable/email_icon" />
-        
+
         <Button
             android:id="@+id/txtBtn"
             android:layout_width="50dp"
@@ -58,10 +57,26 @@
             android:layout_margin="5dp"
             android:background="@drawable/sms_icon" />
 
-        </LinearLayout>
-
+      
+    </LinearLayout>
     
+   <!--   <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal" >
+    <SeekBar
+            android:id="@+id/volbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:max="100" >
+        </SeekBar>
+        
+    </LinearLayout>-->
+
     <!-- Play / Stop Buttons -->
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -76,7 +91,7 @@
             android:layout_gravity="bottom|center"
             android:layout_marginBottom="5dp"
             android:background="@drawable/play_icon" />
-        
+
         <Button
             android:id="@+id/StopButton"
             android:layout_width="145dp"
@@ -84,8 +99,6 @@
             android:layout_gravity="bottom|center"
             android:layout_marginBottom="5dp"
             android:background="@drawable/stop_icon" />
-
-        
     </LinearLayout>
 
 </LinearLayout>
