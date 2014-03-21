@@ -18,18 +18,19 @@ import android.widget.Toast;
 public class RadioMediaPlayerService extends Service {
 
 	//private MediaPlayer mediaPlayer = null;
-	private boolean      isPlaying = false;
-	private MediaPlayer radioPlayer;
+	private boolean isPlaying = false;
+	private MediaPlayer radioPlayer; //The media player instance
 
 	private static int classID = 579; // just a number
-	
-	public static String START_PLAY = "START_PLAY";
+	public static String START_PLAY = "START_PLAY"; 
 
+	
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
 	}
 
+	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if (intent.getBooleanExtra(START_PLAY, false)) {
@@ -38,7 +39,11 @@ public class RadioMediaPlayerService extends Service {
 		return Service.START_STICKY;	
 	}
 
-	//Play audio stream
+	
+	/**
+	 * Starts radio URL stream
+	 * NOTE that stream URL and notification settings go here
+	 */
 	@SuppressLint("NewApi")
 	private void play() {
 		if (!isPlaying) {			
@@ -95,13 +100,16 @@ public class RadioMediaPlayerService extends Service {
 		}
 	}
 
+	
 	@Override
 	public void onDestroy() {
 		stop();
 	}	
 	
 	
-	//Stop audio 
+	/**
+	 * Stops audio from the active service
+	 */
 	private void stop() {
 		if (isPlaying) {
 			isPlaying = false;
