@@ -7,6 +7,8 @@
     android:background="@drawable/background_main"
     android:orientation="vertical" >
 
+    <!-- Logo -->
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,12 +17,12 @@
         android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="306dp"
-            android:layout_height="306dp"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
             android:background="@drawable/radio_logo" />
     </LinearLayout>
 
-    <!-- Middle Buttons -->
+    <!-- Middle Buttons / Social buttons -->
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -56,24 +58,23 @@
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:background="@drawable/sms_icon" />
-
-      
     </LinearLayout>
-    
-   <!--   <LinearLayout
+
+    <!-- AdBanner -->
+
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="54dp"
         android:baselineAligned="false"
+        android:gravity="center_horizontal"
         android:orientation="horizontal" >
-    <SeekBar
-            android:id="@+id/volbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:max="100" >
-        </SeekBar>
-        
-    </LinearLayout>-->
+
+        <ImageView
+            android:id="@+id/display_banner"
+            android:layout_width="306dp"
+            android:layout_height="54dp"
+            android:background="@drawable/black_fill" /> <!-- If offline display this -->
+    </LinearLayout>
 
     <!-- Play / Stop Buttons -->
 

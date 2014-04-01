@@ -23,7 +23,7 @@ public class RadioMediaPlayerService extends Service {
 
 	private static int classID = 579; // just a number
 	public static String START_PLAY = "START_PLAY"; 
-
+ 
 	
 	@Override
 	public IBinder onBind(Intent intent) {

@@ -5,6 +5,8 @@
 
 package com.clickgostudio.air1072;
 
+import java.net.URL;
+
 import com.clickgostudio.air1072.R;
 
 import android.media.AudioManager;
@@ -13,15 +15,18 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 
 public class MainActivity extends Activity {
 
 	private Button stopButton = null;
 	private Button playButton = null;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +55,9 @@ public class MainActivity extends Activity {
 		});
 
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
-		
+
 		clickListeners();
+		adBanner();
 
 	}
 
@@ -105,6 +111,22 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
+	}
+
+
+	/**
+	 * Get and display advertising banner. Default offline image can be changed from layout file. 
+	 */
+	private void adBanner(){
+		try {
+			URL thumb_u = new URL("http://www.aironair.co.uk/wp-content/uploads/2013/09/App-Banner.png");
+			Drawable thumb_d = Drawable.createFromStream(thumb_u.openStream(), "src");
+			final ImageView displayBanner = (ImageView)this.findViewById(R.id.display_banner);
+			displayBanner.setImageDrawable(thumb_d);
+		}
+		catch (Exception e) {
+			System.out.println("adBanner issue");
+		}
 	}
 
 }
