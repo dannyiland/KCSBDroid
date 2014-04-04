@@ -5,21 +5,28 @@
 
 package com.clickgostudio.air1072;
 
+import java.io.InputStream;
 import java.net.URL;
 
 import com.clickgostudio.air1072.R;
 
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 public class MainActivity extends Activity {
@@ -118,15 +125,39 @@ public class MainActivity extends Activity {
 	 * Get and display advertising banner. Default offline image can be changed from layout file. 
 	 */
 	private void adBanner(){
-		try {
-			URL thumb_u = new URL("http://www.aironair.co.uk/wp-content/uploads/2013/09/App-Banner.png");
-			Drawable thumb_d = Drawable.createFromStream(thumb_u.openStream(), "src");
-			final ImageView displayBanner = (ImageView)this.findViewById(R.id.display_banner);
-			displayBanner.setImageDrawable(thumb_d);
+
+		//Hide ad banner if screen size too small
+		if ((getResources().getConfiguration().screenLayout & 
+				Configuration.SCREENLAYOUT_SIZE_MASK) == 
+				Configuration.SCREENLAYOUT_SIZE_SMALL) {
+
+
+			LinearLayout adAreaLl = (LinearLayout)findViewById(R.id.adArea);
+			adAreaLl.setVisibility(View.GONE);
+
 		}
-		catch (Exception e) {
-			System.out.println("adBanner issue");
+		//Show on all other screen sizes
+		else{
+
+			try { 
+				//URL thumb_u = new URL("http://www.aironair.co.uk/wp-content/uploads/2013/09/App-Banner.png");
+				//Drawable thumb_d = Drawable.createFromStream(thumb_u.openStream(), "src");
+				//final ImageView displayBanner = (ImageView)this.findViewById(R.id.display_banner);
+				//displayBanner.setImageDrawable(thumb_d);
+
+				URL url = new URL("http://www.aironair.co.uk/wp-content/uploads/2013/09/App-Banner.png");
+				Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+				//ImageView displayBanner = (ImageView)this.findViewById(R.id.display_banner);
+				//displayBanner.setImageBitmap(bmp);
+			}
+			catch (Exception e) {
+				System.out.println("adBanner issue");
+			} 
 		}
 	}
 
+
+
 }
+
+
