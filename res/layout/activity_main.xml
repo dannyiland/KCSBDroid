@@ -63,6 +63,7 @@
     <!-- AdBanner -->
 
     <LinearLayout
+        android:id="@+id/adArea"
         android:layout_width="fill_parent"
         android:layout_height="54dp"
         android:baselineAligned="false"
@@ -73,7 +74,7 @@
             android:id="@+id/display_banner"
             android:layout_width="306dp"
             android:layout_height="54dp"
-            android:background="@drawable/black_fill" /> <!-- If offline display this -->
+             /> <!-- If offline display this -->
     </LinearLayout>
 
     <!-- Play / Stop Buttons -->
