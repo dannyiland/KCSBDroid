@@ -22,12 +22,15 @@ import android.widget.Toast;
 
 public class RadioMediaPlayerService extends Service {
 
-	//private MediaPlayer mediaPlayer = null;
+	//Variables
 	private boolean isPlaying = false;
 	private MediaPlayer radioPlayer; //The media player instance
 
 	private static int classID = 579; // just a number
 	public static String START_PLAY = "START_PLAY"; 
+	
+	//Settings
+	private static final String STREAM_URL = "http://stream.aironair.co.uk:8002";
 
 
 	@Override
@@ -75,7 +78,7 @@ public class RadioMediaPlayerService extends Service {
 				//Get stream URL
 				radioPlayer = new MediaPlayer();
 				try {
-					radioPlayer.setDataSource("http://stream.aironair.co.uk:8002"); //Place URL here
+					radioPlayer.setDataSource(STREAM_URL); //Place URL here
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
 				} catch (IllegalStateException e) {
