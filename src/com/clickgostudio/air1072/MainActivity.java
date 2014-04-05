@@ -6,7 +6,6 @@
 package com.clickgostudio.air1072;
 
 import java.io.InputStream;
-import java.net.URL;
 
 import com.clickgostudio.air1072.R;
 
@@ -15,26 +14,31 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
 	private Button stopButton = null;
 	private Button playButton = null;
+	
+	//Settings
+	private final String ADURL = "http://www.aironair.co.uk/wp-content/uploads/2013/09/App-Banner.png";
+	private final String EMAILADD = "studio@aironair.co.uk";
 
 
+	/**
+	 * Done upon opening the activity
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,10 +81,18 @@ public class MainActivity extends Activity {
 		final View EmailPress = (Button)this.findViewById(R.id.emailBtn);
 		EmailPress.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view){
-				if (view == findViewById(R.id.emailBtn)){
-					Intent emailIntent = new Intent(Intent.ACTION_SEND);
-					//startActivity (emailIntent); TODO Fix
+
+				Intent emailIntent = new Intent(Intent.ACTION_SEND);
+				emailIntent.setType("message/rfc822");
+				emailIntent.putExtra(Intent.EXTRA_EMAIL  , new String[]{EMAILADD});
+				//i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+				//i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+				try {
+					startActivity(Intent.createChooser(emailIntent, "Send email..."));
+				} catch (android.content.ActivityNotFoundException ex) {
+					Toast.makeText(MainActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
 				}
+
 			}
 		});
 
@@ -88,11 +100,11 @@ public class MainActivity extends Activity {
 		final View PhonePress = (Button)this.findViewById(R.id.phoneBtn);
 		PhonePress.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view){
-				if (view == findViewById(R.id.phoneBtn)){
-					String phoneNum = "tel:01305836040";
-					Intent phoneIntent = new Intent(Intent.ACTION_CALL, Uri.parse(phoneNum));
-					startActivity (phoneIntent);
-				}
+
+				String phoneNum = "tel:01305836040";
+				Intent phoneIntent = new Intent(Intent.ACTION_CALL, Uri.parse(phoneNum));
+				startActivity (phoneIntent);
+
 			}
 		});
 
@@ -100,10 +112,10 @@ public class MainActivity extends Activity {
 		final View WWWPress = (Button)this.findViewById(R.id.websiteBtn);
 		WWWPress.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view){
-				if (view == findViewById(R.id.websiteBtn)){
-					Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://aironair.co.uk")); //URL
-					startActivity (browserIntent);
-				}
+
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://aironair.co.uk")); //URL
+				startActivity (browserIntent);
+
 			}
 		});
 
@@ -111,18 +123,17 @@ public class MainActivity extends Activity {
 		final View TxtPress = (Button)this.findViewById(R.id.txtBtn);
 		TxtPress.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view){
-				if (view == findViewById(R.id.txtBtn)){
-					Intent smsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" +66777)); smsIntent.putExtra("sms_body", "AIR ");
-					startActivity(smsIntent);
-					//TODO Fix crash
-				}
+
+				Intent smsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" +66777)); smsIntent.putExtra("sms_body", "AIR ");
+				startActivity(smsIntent);
+
 			}
 		});
 	}
 
 
 	/**
-	 * Get and display advertising banner. Default offline image can be changed from layout file. 
+	 * Get and display advertising banner. Also determine screen size and show / hide ad accordingly
 	 */
 	private void adBanner(){
 
@@ -131,31 +142,48 @@ public class MainActivity extends Activity {
 				Configuration.SCREENLAYOUT_SIZE_MASK) == 
 				Configuration.SCREENLAYOUT_SIZE_SMALL) {
 
-
 			LinearLayout adAreaLl = (LinearLayout)findViewById(R.id.adArea);
 			adAreaLl.setVisibility(View.GONE);
-
 		}
+
 		//Show on all other screen sizes
 		else{
 
-			try { 
-				//URL thumb_u = new URL("http://www.aironair.co.uk/wp-content/uploads/2013/09/App-Banner.png");
-				//Drawable thumb_d = Drawable.createFromStream(thumb_u.openStream(), "src");
-				//final ImageView displayBanner = (ImageView)this.findViewById(R.id.display_banner);
-				//displayBanner.setImageDrawable(thumb_d);
+			new DownloadImageTask((ImageView) findViewById(R.id.display_banner))
+			.execute(ADURL);
 
-				URL url = new URL("http://www.aironair.co.uk/wp-content/uploads/2013/09/App-Banner.png");
-				Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-				//ImageView displayBanner = (ImageView)this.findViewById(R.id.display_banner);
-				//displayBanner.setImageBitmap(bmp);
-			}
-			catch (Exception e) {
-				System.out.println("adBanner issue");
-			} 
 		}
 	}
 
+
+	/**
+	 * Load image from external source Asyncrons
+	 * @author davidbain
+	 */
+	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+		ImageView adImage;
+
+		public DownloadImageTask(ImageView bmImage) {
+			this.adImage = bmImage;
+		}
+
+		protected Bitmap doInBackground(String... urls) {
+			String urldisplay = urls[0];
+			Bitmap adBmFa = null;
+			try {
+				InputStream in = new java.net.URL(urldisplay).openStream();
+				adBmFa = BitmapFactory.decodeStream(in);
+			} catch (Exception e) {
+				Log.e("Error", e.getMessage());
+				e.printStackTrace();
+			}
+			return adBmFa;
+		}
+
+		protected void onPostExecute(Bitmap result) {
+			adImage.setImageBitmap(result);
+		}
+	}
 
 
 }
