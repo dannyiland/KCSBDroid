@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.clickgostudio.air1072.R;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
