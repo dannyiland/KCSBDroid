@@ -1,9 +1,7 @@
 package com.clickgostudio.air1072;
 
 import java.io.IOException;
-
 import com.clickgostudio.air1072.R;
-
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -37,7 +35,10 @@ public class RadioMediaPlayerService extends Service {
 		return null;
 	}
 
-
+	
+	/**
+	 * Starts the streaming service
+	 */
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if (intent.getBooleanExtra(START_PLAY, false)) {
@@ -119,6 +120,9 @@ public class RadioMediaPlayerService extends Service {
 	}
 
 
+	/**
+	 * Stops the stream if activity destroyed
+	 */
 	@Override
 	public void onDestroy() {
 		stop();
@@ -142,7 +146,12 @@ public class RadioMediaPlayerService extends Service {
 				Toast.LENGTH_LONG).show();
 	}
 
-
+	
+	/**
+	 * Checks if there is a data or internet connection before starting the stream. 
+	 * Displays Toast warning if there is no connection
+	 * @return online status boolean
+	 */
 	public boolean isOnline() {
 		ConnectivityManager cm =
 				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

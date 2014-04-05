@@ -6,9 +6,7 @@
 package com.clickgostudio.air1072;
 
 import java.io.InputStream;
-
 import com.clickgostudio.air1072.R;
-
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
