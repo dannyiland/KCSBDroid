@@ -1,5 +1,7 @@
 /bin
+bin/
 /gen
+gen/
 gen/com/clickgostudio/air1072/R.java
 
 *.class
