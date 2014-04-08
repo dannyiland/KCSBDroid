@@ -22,13 +22,11 @@ public class RadioMediaPlayerService extends Service {
 	//Variables
 	private boolean isPlaying = false;
 	private MediaPlayer radioPlayer; //The media player instance
-
 	private static int classID = 579; // just a number
 	public static String START_PLAY = "START_PLAY"; 
-	
+
 	//Settings
 	Settings settings = new Settings();
-	//private static final String STREAM_URL = "http://stream.aironair.co.uk:8002";
 
 
 	@Override
@@ -36,7 +34,7 @@ public class RadioMediaPlayerService extends Service {
 		return null;
 	}
 
-	
+
 	/**
 	 * Starts the streaming service
 	 */
@@ -57,6 +55,7 @@ public class RadioMediaPlayerService extends Service {
 
 		//Check connectivity status
 		if (isOnline()) {
+			//Check if player already streaming
 			if (!isPlaying) {			
 				isPlaying = true;
 
@@ -87,12 +86,14 @@ public class RadioMediaPlayerService extends Service {
 					e.printStackTrace();
 				}
 
-				//Buffering Info
-				radioPlayer.setOnBufferingUpdateListener(new OnBufferingUpdateListener() {
-					public void onBufferingUpdate(MediaPlayer mp, int percent) {
-						Log.i("Buffering", "" + percent);
-					}
-				});
+				if (settings.getAllowConsole()){
+					//Buffering Info
+					radioPlayer.setOnBufferingUpdateListener(new OnBufferingUpdateListener() {
+						public void onBufferingUpdate(MediaPlayer mp, int percent) {
+							Log.i("Buffering", "" + percent);
+						}
+					});
+				}
 
 				radioPlayer.prepareAsync();
 				radioPlayer.setOnPreparedListener(new OnPreparedListener() {
@@ -101,7 +102,6 @@ public class RadioMediaPlayerService extends Service {
 						radioPlayer.start(); //Start radio stream
 					}
 				});
-
 
 				startForeground(classID, notification);
 
@@ -146,7 +146,7 @@ public class RadioMediaPlayerService extends Service {
 				Toast.LENGTH_LONG).show();
 	}
 
-	
+
 	/**
 	 * Checks if there is a data or internet connection before starting the stream. 
 	 * Displays Toast warning if there is no connection
