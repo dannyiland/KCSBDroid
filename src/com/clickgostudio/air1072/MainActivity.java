@@ -30,10 +30,14 @@ public class MainActivity extends Activity {
 	private Button playButton = null;
 	
 	//Settings
-	private final String ADURL = "http://www.aironair.co.uk/wp-content/uploads/2013/09/App-Banner.png";
-	private final String EMAILADD = "studio@aironair.co.uk";
+	Settings settings = new Settings();
+	//private final String ADURL = "http://www.aironair.co.uk/wp-content/uploads/2013/09/App-Banner.png";
+	private final String ADURL = settings.getAdBannerURL();
+	//private String ADURL = getString(R.string.ad_banner_url);
+	//private final String EMAILADD = "studio@aironair.co.uk";
+	private final String EMAILADD = settings.getEmailAddress();
 
-
+ 
 	/**
 	 * Done upon opening the activity
 	 */
@@ -65,8 +69,8 @@ public class MainActivity extends Activity {
 
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-		clickListeners();
-		adBanner();
+		clickListeners(); //Start click listeners
+		adBanner(); //Start ad banner loading and display
 
 	}
 
@@ -99,7 +103,7 @@ public class MainActivity extends Activity {
 		PhonePress.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view){
 
-				String phoneNum = "tel:01305836040";
+				String phoneNum = settings.getPhoneNumber();
 				Intent phoneIntent = new Intent(Intent.ACTION_CALL, Uri.parse(phoneNum));
 				startActivity (phoneIntent);
 
@@ -111,7 +115,7 @@ public class MainActivity extends Activity {
 		WWWPress.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view){
 
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://aironair.co.uk")); //URL
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(settings.getWebsiteURL())); //URL
 				startActivity (browserIntent);
 
 			}
@@ -122,7 +126,7 @@ public class MainActivity extends Activity {
 		TxtPress.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view){
 
-				Intent smsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" +66777)); smsIntent.putExtra("sms_body", "AIR ");
+				Intent smsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" +settings.getSmsNumber())); smsIntent.putExtra("sms_body", "AIR ");
 				startActivity(smsIntent);
 
 			}
@@ -156,7 +160,6 @@ public class MainActivity extends Activity {
 
 	/**
 	 * Load image from external source Asyncrons
-	 * @author davidbain
 	 */
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView adImage;

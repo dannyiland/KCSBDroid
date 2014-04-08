@@ -27,7 +27,8 @@ public class RadioMediaPlayerService extends Service {
 	public static String START_PLAY = "START_PLAY"; 
 	
 	//Settings
-	private static final String STREAM_URL = "http://stream.aironair.co.uk:8002";
+	Settings settings = new Settings();
+	//private static final String STREAM_URL = "http://stream.aironair.co.uk:8002";
 
 
 	@Override
@@ -50,7 +51,6 @@ public class RadioMediaPlayerService extends Service {
 
 	/**
 	 * Starts radio URL stream
-	 * NOTE that stream URL and notification settings go here
 	 */
 	@SuppressLint("NewApi")
 	private void play() {
@@ -67,10 +67,10 @@ public class RadioMediaPlayerService extends Service {
 
 				PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
 
-				//Build and show notificaion for radio playing
+				//Build and show notification for radio playing
 				Notification notification = new Notification.Builder(getApplicationContext())
-				.setContentTitle("AIR 107.2")
-				.setContentText("You're listening to AIR")
+				.setContentTitle(settings.getRadioName())
+				.setContentText(settings.getMainNotificationMessage())
 				.setSmallIcon(R.drawable.ic_launcher)
 				.setContentIntent(pi)
 				.build();
@@ -78,7 +78,7 @@ public class RadioMediaPlayerService extends Service {
 				//Get stream URL
 				radioPlayer = new MediaPlayer();
 				try {
-					radioPlayer.setDataSource(STREAM_URL); //Place URL here
+					radioPlayer.setDataSource(settings.getRadioStreamURL()); //Place URL here
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
 				} catch (IllegalStateException e) {
@@ -106,12 +106,12 @@ public class RadioMediaPlayerService extends Service {
 				startForeground(classID, notification);
 
 				//Display toast notification
-				Toast.makeText(getApplicationContext(), "Starting AIR 107.2",
+				Toast.makeText(getApplicationContext(), settings.getPlayNotificationMessage(),
 						Toast.LENGTH_LONG).show();
 			}
 		}
 		else {
-			//Display no conectivity warning
+			//Display no connectivity warning
 			Toast.makeText(getApplicationContext(), "No internet connection",
 					Toast.LENGTH_LONG).show();
 		}

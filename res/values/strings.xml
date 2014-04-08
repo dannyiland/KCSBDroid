@@ -2,5 +2,6 @@
 <resources>
 
     <string name="app_name">AIR 107.2</string>
+    <string name="ad_banner_url">http://www.aironair.co.uk/wp-content/uploads/2013/09/App-Banner.png</string>
 
 </resources>
