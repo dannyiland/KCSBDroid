@@ -5,7 +5,7 @@
 package com.clickgostudio.air1072;
 
 public class Settings {
-	//Place your URLS and other editable settings here
+	/********ALL EDITABLE SETTINGS ARE HERE *****/
 
 	//Name of radio station
 	private String radioName = "AIR 107.2";
@@ -37,7 +37,7 @@ public class Settings {
 	//Enable console output for streaming info (Buffering etc) 
 	private boolean allowConsole = true;
 	
-	
+	/********END OF EDITABLE SETTINGS**********/
 	
 	
 	
