@@ -34,7 +34,7 @@ public class Settings {
 	//TOAST notification when play button is pressed
 	private String playNotificationMessage = "Starting AIR 107.2";
 	
-	//Enable console output for streaming info (Buffering etc) 
+	//Enable console output for streaming info (Buffering etc) - Disable = false
 	private boolean allowConsole = true;
 	
 	/********END OF EDITABLE SETTINGS**********/

@@ -72,7 +72,7 @@ public class RadioMediaPlayerService extends Service {
 				.setContentText(settings.getMainNotificationMessage())
 				.setSmallIcon(R.drawable.ic_launcher)
 				.setContentIntent(pi)
-				.build();
+				.build(); 
 
 				//Get stream URL
 				radioPlayer = new MediaPlayer();

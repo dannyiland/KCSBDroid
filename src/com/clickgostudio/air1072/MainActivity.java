@@ -28,16 +28,13 @@ public class MainActivity extends Activity {
 
 	private Button stopButton = null;
 	private Button playButton = null;
-	
+
 	//Settings
 	Settings settings = new Settings();
-	//private final String ADURL = "http://www.aironair.co.uk/wp-content/uploads/2013/09/App-Banner.png";
 	private final String ADURL = settings.getAdBannerURL();
-	//private String ADURL = getString(R.string.ad_banner_url);
-	//private final String EMAILADD = "studio@aironair.co.uk";
 	private final String EMAILADD = settings.getEmailAddress();
 
- 
+
 	/**
 	 * Done upon opening the activity
 	 */
@@ -46,27 +43,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		playButton = (Button)findViewById(R.id.PlayButton);
-		playButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(), 
-						RadioMediaPlayerService.class);
-				intent.putExtra(RadioMediaPlayerService.START_PLAY, true);
-				startService(intent);
-
-			}
-		});
-
-		stopButton = (Button)findViewById(R.id.StopButton);
-		stopButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				//Get new MediaPlayerService activity
-				Intent intent = new Intent(getApplicationContext(),
-						RadioMediaPlayerService.class);
-				stopService(intent);
-			}
-		});
-
+		//Allow hardware audio buttons to control volume
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 		clickListeners(); //Start click listeners
@@ -79,7 +56,30 @@ public class MainActivity extends Activity {
 	 * Listens for contact button clicks
 	 */
 	private void clickListeners(){
-		//Email Button
+		//Play button
+		playButton = (Button)findViewById(R.id.PlayButton);
+		playButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(getApplicationContext(), 
+						RadioMediaPlayerService.class);
+				intent.putExtra(RadioMediaPlayerService.START_PLAY, true);
+				startService(intent);
+
+			}
+		});
+
+		//Stop button
+		stopButton = (Button)findViewById(R.id.StopButton);
+		stopButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				//Get new MediaPlayerService activity
+				Intent intent = new Intent(getApplicationContext(),
+						RadioMediaPlayerService.class);
+				stopService(intent);
+			}
+		});
+
+		//Email Button click list
 		final View EmailPress = (Button)this.findViewById(R.id.emailBtn);
 		EmailPress.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view){
