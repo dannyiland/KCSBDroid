@@ -3,5 +3,9 @@ bin/
 /gen
 gen/
 gen/com/clickgostudio/air1072/R.java
+/bin/**
+/gen/**
+bin/**
+gen/**
 
 *.class
