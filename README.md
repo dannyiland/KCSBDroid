@@ -22,6 +22,7 @@ A working and available to download version of this code can be found on the [Pl
 
 
 Soruce code is available under MIT licence. 
-![MIT](http://i.imgur.com/HlDXQUH.png =100x100)
+
+![MIT](http://i.imgur.com/HlDXQUH.png =50x50)
 
  
