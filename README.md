@@ -22,6 +22,6 @@ A working and available to download version of this code can be found on the [Pl
 
 
 Soruce code is available under MIT licence. 
-<img src="http://i.imgur.com/HlDXQUH.png " alt="MIT" style="width: 50px;"/>
+<img src="http://i.imgur.com/HlDXQUH.png" alt="MIT" style="width: 50px;"/>
 
  
