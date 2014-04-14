@@ -19,4 +19,9 @@ A working and available to download version of this code can be found on the [Pl
 ---------------
  - Add now playing track information 
  - Combine play and stop button
+
+
+Soruce code is available under MIT licence. 
+![MIT](http://i.imgur.com/HlDXQUH.png =100x100)
+
  
