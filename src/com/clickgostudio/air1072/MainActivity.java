@@ -126,7 +126,7 @@ public class MainActivity extends Activity {
 		TxtPress.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view){
 
-				Intent smsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" +settings.getSmsNumber())); smsIntent.putExtra("sms_body", "AIR ");
+				Intent smsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" +settings.getSmsNumber()));
 				startActivity(smsIntent);
 
 			}

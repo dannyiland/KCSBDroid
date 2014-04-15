@@ -8,31 +8,30 @@ public class Settings {
 	/********ALL EDITABLE SETTINGS ARE HERE *****/
 
 	//Name of radio station
-	private String radioName = "AIR 107.2";
+	private String radioName = "KCSB 91.9";
 
 	//URL of the radio stream
-	private String radioStreamURL = "http://stream.aironair.co.uk:8002";
-
-	//URL for the advertising / message banner. For no banner leave blank, i.e: ""
-	private String adBannerURL = "http://www.aironair.co.uk/wp-content/uploads/2013/09/App-Banner.png";
+	private String radioStreamURL = "http://live.kcsb.org:80/KCSB_128";
 	
+	//URL for the advertising / message banner. For no banner leave blank, i.e: ""
+	private String adBannerURL = "";
 	//Contact button email address
-	private String emailAddress = "studio@aironair.co.uk";
+	private String emailAddress = "info@kcsb.org";
 	
 	//Contact button phone number
-	private String phoneNumber = "01305836040";
+	private String phoneNumber = "8058938000";
 
 	//Contact button website URL
-	private String websiteURL = "http://aironair.co.uk";
+	private String websiteURL = "http://kcsb.org";
 	
 	//Contact button SMS number
-	private int smsNumber = 66777;
+	private String smsNumber = "8054098272";
 	
 	//Message to be shown in notification center whilst playing
-	private String mainNotificationMessage = "You're listening to AIR";
+	private String mainNotificationMessage = "You're listening to KCSB";
 
 	//TOAST notification when play button is pressed
-	private String playNotificationMessage = "Starting AIR 107.2";
+	private String playNotificationMessage = "Starting KCSB 91.9";
 	
 	//Enable console output for streaming info (Buffering etc) - Disable = false
 	private boolean allowConsole = true;
@@ -67,7 +66,7 @@ public class Settings {
 		return websiteURL;
 	}
 	
-	public int getSmsNumber(){
+	public String getSmsNumber(){
 		return smsNumber;
 	}
 	
